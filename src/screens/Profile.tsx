@@ -19,14 +19,14 @@ export default function Profile ({navigation}: { navigation :any}) {
         </View>
         <View style={styles.detailsRow}>
           <Text style={styles.detailsLabel}>Location</Text>
-          <Text style={styles.detailsValue}>Bhubaneswar, Bharat</Text>
+          <Text style={styles.detailsValue}>Bhubaneswar,Bharat</Text>
         </View>
         <View style={styles.detailsRow}>
           <Text style={styles.detailsLabel}>Phone</Text>
-          <Text style={styles.detailsValue}>(+91) 98765-43210</Text>
+          <Text style={styles.detailsValue}>(+91)98765-43210</Text>
         </View>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Edit Profile</Text>
+          <Text style={styles.buttonText}>Edit_Profile</Text>
         </TouchableOpacity>
       </View>
       <Nav navigation={navigation} />

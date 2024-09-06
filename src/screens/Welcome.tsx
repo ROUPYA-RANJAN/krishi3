@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
 import { Logo } from "../../assets";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Welcome() {
   const [isLogin, setIsLogin] = useState(false);

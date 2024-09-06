@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import React from 'react';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 export default function Nav({ navigation }: { navigation: any }) {
   return (

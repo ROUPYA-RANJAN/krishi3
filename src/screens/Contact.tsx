@@ -57,10 +57,10 @@ export default function Contact () {
       </View>
       <View style={styles.container}>
         <View style={styles.contactInfoContainer}>
-          <Text style={styles.contactTitle}>Seller Information:</Text>
-          <Text style={styles.contactText}>Name: Tushar Saini</Text>
-          <Text style={styles.contactText}>Email: 123@example.com</Text>
-          <Text style={styles.contactText}>Phone: (+91) 98765-43210</Text>
+          <Text style={styles.contactTitle}>Seller_Information:</Text>
+          <Text style={styles.contactText}>Name:_Tushar_Saini</Text>
+          <Text style={styles.contactText}>Email:_123@example.com</Text>
+          <Text style={styles.contactText}>Phone:_(+91)98765-43210</Text>
         </View>
       </View>
     </View>

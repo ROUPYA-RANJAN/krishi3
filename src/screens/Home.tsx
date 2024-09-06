@@ -45,17 +45,17 @@ export default function Home({ navigation }: { navigation: any }) {
             style={styles.button}
             onPress={() => navigation.navigate("Products")}
           >
-            <Text style={styles.buttonText}>View All</Text>
+            <Text style={styles.buttonText}>View_All</Text>
           </TouchableOpacity>
         </View>
 
         {/* Products Section */}
         <View style={styles.productSection}>
           <View style={styles.productsHeader}>
-            <Text style={styles.sectionTitle}>Products Near You</Text>
+            <Text style={styles.sectionTitle}>Products_Near_You</Text>
             <TouchableOpacity style={styles.sortButton}>
               <MaterialIcons name="sort" size={20} color="white" />
-              <Text style={styles.sortButtonText}>Sort by Location</Text>
+              <Text style={styles.sortButtonText}>Sort_by_Location</Text>
             </TouchableOpacity>
           </View>
           {productsData
@@ -92,7 +92,7 @@ function ProductCard({ product }: { product: any }) {
           {product.name}
         </Text>
         <Text style={styles.productLocation}>{product.location}</Text>
-        <Text style={styles.productDate}>Posted on: {product.date}</Text>
+        <Text style={styles.productDate}>Posted_on: {product.date}</Text>
         <Text style={styles.productPrice}>₹{product.price}</Text> {/* Added Rupees symbol */}
       </View>
       <TouchableOpacity style={styles.likeButton}>

@@ -62,7 +62,7 @@ export default function Cart({ navigation }: { navigation: any}) {
   const renderEmptyCart = () => {
     return (
       <View style={styles.emptyCart}>
-        <Text style={styles.emptyCartText}>Your cart is empty</Text>
+        <Text style={styles.emptyCartText}>Your_cart_is_empty</Text>
       </View>
     );
   };
@@ -79,7 +79,7 @@ export default function Cart({ navigation }: { navigation: any}) {
         </Text>
       </View>
       <TouchableOpacity style={styles.checkoutButton} onPress={()=>navigation.navigate("Payment")}>
-        <Text style={styles.checkoutButtonText}>Proceed to checkout</Text>
+        <Text style={styles.checkoutButtonText}>Proceed_to_checkout</Text>
       </TouchableOpacity>
     </View>
   );

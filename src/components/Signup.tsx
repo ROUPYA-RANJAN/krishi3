@@ -37,7 +37,7 @@ export default function Signup() {
         secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+        <Text style={styles.buttonText}>SignUp</Text>
       </TouchableOpacity>
     </>
   );

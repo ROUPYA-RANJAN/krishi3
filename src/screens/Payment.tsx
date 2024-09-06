@@ -18,7 +18,7 @@ const PaymentScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enter Payment Details</Text>
+      <Text style={styles.title}>Enter_Payment_Details</Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -40,7 +40,7 @@ const PaymentScreen = () => {
           secureTextEntry={true}
         />
         <TouchableOpacity style={styles.button} onPress={handlePayment}>
-          <Text style={styles.buttonText}>Pay Now</Text>
+          <Text style={styles.buttonText}>Pay_Now</Text>
         </TouchableOpacity>
       </View>
     </View>

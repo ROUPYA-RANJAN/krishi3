@@ -27,10 +27,10 @@ const ProductDetail = ({ navigation }: { navigation: any}) => {
       <View style={styles.contentContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.description}>{description}</Text>
-        <Text style={styles.price}>Price: ₹{price}</Text>
-        <Text style={styles.quantity}>Quantity: {quantity}</Text>
+        <Text style={styles.price}>Price:₹{price}</Text>
+        <Text style={styles.quantity}>Quantity:{quantity}</Text>
         <View style={styles.sellerContainer}>
-          <Text style={styles.seller}>Sold by:</Text>
+          <Text style={styles.seller}>Sold_by:</Text>
           <Text style={styles.sellerName}>{seller.name}</Text>
           <Text style={styles.sellerLocation}>{seller.location}</Text>
           <View style={styles.ratingContainer}>
@@ -42,7 +42,7 @@ const ProductDetail = ({ navigation }: { navigation: any}) => {
           style={styles.button}
           onPress={() => navigation.navigate("Cart")}
         >
-          <Text style={styles.buttonText}>Add to Cart</Text>
+          <Text style={styles.buttonText}>Add_to_Cart</Text>
         </TouchableOpacity>
       </View>
     </View>
