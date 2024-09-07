@@ -41,7 +41,7 @@ export default function Cart({ navigation }: { navigation: any}) {
         <Image source={item.image} style={styles.itemImage} />
         <View style={styles.itemDetails}>
           <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
+          <Text style={styles.itemPrice}>₹{item.price.toFixed(2)}</Text>
           <View style={styles.quantityControl}>
             <TouchableOpacity disabled={item.quantity<=1} style={styles.quantityButton} onPress={() => handleQuantityChange(item, -1)}>
               <Text style={styles.quantityButtonText}>-</Text>
@@ -62,7 +62,7 @@ export default function Cart({ navigation }: { navigation: any}) {
   const renderEmptyCart = () => {
     return (
       <View style={styles.emptyCart}>
-        <Text style={styles.emptyCartText}>Your_cart_is_empty</Text>
+        <Text style={styles.emptyCartText}>Your cart is empty</Text>
       </View>
     );
   };
@@ -79,7 +79,7 @@ export default function Cart({ navigation }: { navigation: any}) {
         </Text>
       </View>
       <TouchableOpacity style={styles.checkoutButton} onPress={()=>navigation.navigate("Payment")}>
-        <Text style={styles.checkoutButtonText}>Proceed_to_checkout</Text>
+        <Text style={styles.checkoutButtonText}>Proceed to checkout</Text>
       </TouchableOpacity>
     </View>
   );
@@ -113,13 +113,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemName: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 17,
+    
     marginBottom: 10,
   },
   itemPrice: {
-    fontSize: 16,
-    color: "#888",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
     marginBottom: 10,
   },
   quantityControl: {

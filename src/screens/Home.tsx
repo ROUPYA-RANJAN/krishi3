@@ -66,7 +66,7 @@ export default function Home({ navigation }: { navigation: any }) {
             <Text style={styles.sectionTitle}>Products Near You</Text>
             <TouchableOpacity style={styles.sortButton}>
               <MaterialIcons name="sort" size={20} color="white" />
-              <Text style={styles.sortButtonText}>Sort by Location</Text>
+              <Text style={styles.sortButtonText }>Sort by Location</Text>
             </TouchableOpacity>
           </View>
 
@@ -113,7 +113,7 @@ function ProductCard({ product }: { product: any }) {
       </View>
       <TouchableOpacity style={styles.likeButton}>
         <MaterialIcons name="favorite-border" size={24} color="red" />
-        <Text>Like</Text>
+        <Text></Text>
       </TouchableOpacity>
     </View>
   );
@@ -123,27 +123,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F0F0F0",
-    paddingTop: 20,
+    paddingTop: 10,
+    
+    
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "100%",
+    width: "94%",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    marginLeft:10,
+    marginRight: 20,
+    alignContent:"center",
+  
+    
     backgroundColor: "#2874F0",
-    borderRadius: 10,
+    borderRadius: 17,
     marginBottom: 10,
   },
   logo: {
     width: 40,
     height: 40,
-  },
+borderRadius: 20,
+},
   searchInput: {
     flex: 1,
     height: 40,
     marginHorizontal: 10,
+    fontWeight:"400",
     borderRadius: 20,
     paddingHorizontal: 15,
     backgroundColor: "#FFF",
@@ -161,17 +170,19 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     backgroundColor: "#FFF",
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 20,
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 10,
     shadowColor: "#000",
+    
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
   subTitle: {
-    fontSize: 24,
+   
+    fontSize: 20,
     fontWeight: "700",
     color: "#333",
     marginBottom: 15,
@@ -181,7 +192,7 @@ const styles = StyleSheet.create({
   categoriesGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "center",  //space-between
   },
   categoryButton: {
     backgroundColor: "#ceff94",
@@ -190,8 +201,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    width: "47%",
-    height: 140,
+    width: 140,
+    height: 100,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
@@ -199,22 +210,22 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   categoryIcon: {
-    width: 80,
-    height: 80,
-    marginBottom: 10,
+    width: 60,
+    height: 60,
+    marginBottom: 5,
     borderRadius: 10,
     borderWidth: 3,
     borderColor: "#DDD",
   },
   categoryText: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#5C3C92",
+    fontSize: 14,
+    fontWeight: "500",
+    color: "black",
   },
   button: {
     backgroundColor: "#FF5722",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     marginTop: 20,
     width: "100%",
     alignItems: "center",
@@ -230,16 +241,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   productSection: {
-    marginTop: 20,
+    marginTop: 10,
   },
   productsHeader: {
-    flexDirection: "row",
+   // flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+  alignItems: "center",
+  width: "70%",
+   marginLeft: 50,
     marginBottom: 10,
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "700",
     color: "#333",
   },
@@ -260,9 +273,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 15,
+    paddingLeft:10,
+    padding:5,
+    width:"95%",
+    marginLeft: 10,
+   
+
     marginBottom: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -270,9 +288,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   productImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
+    width: 90,
+    height: 90,
+    borderRadius: 15,
   },
   productDetails: {
     flex: 1,
@@ -281,11 +299,13 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 18,
     fontWeight: "600",
-    marginBottom: 5,
+    marginBottom: 0,
     color: "#333",
   },
   productLocation: {
     fontSize: 14,
+    flexDirection: "row",
+    fontWeight: "500",
     color: "#777",
   },
   productDate: {
@@ -303,5 +323,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    margin:10,
   },
 });
