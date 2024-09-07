@@ -168,7 +168,7 @@ const ProductDetail = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#A0A0A0",
+    backgroundColor: "#F0F0F0",
     
   },
   imageContainer: {
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
+    backgroundColor: "#D0D0D0",
     borderWidth:3,
     borderColor:"#E0E0E0",
     height:"35%",
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 20,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#D0D0D0",
     marginHorizontal: 16,
     borderRadius: 10,
     borderWidth:5,

@@ -57,10 +57,10 @@ export default function Contact () {
       </View>
       <View style={styles.container}>
         <View style={styles.contactInfoContainer}>
-          <Text style={styles.contactTitle}>Seller_Information:</Text>
-          <Text style={styles.contactText}>Name:_Tushar_Saini</Text>
-          <Text style={styles.contactText}>Email:_123@example.com</Text>
-          <Text style={styles.contactText}>Phone:_(+91)98765-43210</Text>
+          <Text style={styles.contactTitle}>Seller Information:</Text>
+          <Text style={styles.contactText}>Name: Tushar Saini</Text>
+          <Text style={styles.contactText}>Email: 123@example.com</Text>
+          <Text style={styles.contactText}>Phone: (+91)98765-43210</Text>
         </View>
       </View>
     </View>
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   form: {
     padding: 20,
     width: '90%',
+    
   },
   input: {
     borderColor: "#ddd",
@@ -86,10 +87,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     fontSize: 16,
+    backgroundColor: "#E0E0E0",
   },
   messageInput: {
     height: 100,
     textAlignVertical: "top",
+    backgroundColor: "#E0E0E0",
+    
   },
   submitButton: {
     backgroundColor: "#35C759",
@@ -110,20 +114,21 @@ const styles = StyleSheet.create({
   contactInfoContainer: {
     width: "80%",
     paddingVertical: 20,
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     borderRadius: 10,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: "#E0E0E0",
     borderWidth: 1,
     borderColor: "#E8E8E8",
   },
   contactTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "800",
     textAlign: "center",
     marginBottom: 10,
   },
   contactText: {
     fontSize: 16,
+    fontWeight:"500",
     marginBottom: 5,
   },
 });

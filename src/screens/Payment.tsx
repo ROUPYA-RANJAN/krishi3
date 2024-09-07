@@ -11,6 +11,7 @@ const PaymentScreen = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
+  const [upi, setUPI] = useState("");
 
   const handlePayment = () => {
     // Handle payment logic
@@ -18,7 +19,7 @@ const PaymentScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enter_Payment_Details</Text>
+      <Text style={styles.title}>Enter Payment Details</Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -39,8 +40,15 @@ const PaymentScreen = () => {
           onChangeText={setCvv}
           secureTextEntry={true}
         />
+         <TextInput
+          style={styles.input}
+          placeholder="UPI"
+          value={upi}
+          onChangeText={setUPI}
+          
+        />
         <TouchableOpacity style={styles.button} onPress={handlePayment}>
-          <Text style={styles.buttonText}>Pay_Now</Text>
+          <Text style={styles.buttonText}>Pay Now</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -50,7 +58,7 @@ const PaymentScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F0F0F0",
     alignItems: "center",
     // justifyContent: "center",
     paddingTop: 60,
@@ -64,11 +72,12 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     marginBottom: 10,
+    backgroundColor:"#E0E0E0",
   },
   button: {
     backgroundColor: "#35C759",

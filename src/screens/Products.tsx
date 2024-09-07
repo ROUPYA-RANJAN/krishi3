@@ -166,7 +166,7 @@ export default function Products({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8E8E8",
+    backgroundColor: "#F0F0F0",
     alignItems: "center",
     justifyContent: "flex-start",
     height: "100%",
@@ -254,13 +254,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 5,
-    backgroundColor: "#FFF",
+    backgroundColor: "#E0E0E0",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
     borderWidth:4,
-    borderColor:"#E0E0E0",
-    shadowColor: "#000",
+    borderColor:"#C8C8C8",
+    shadowColor: "#efefef",
     shadowOffset: {
       width: 0,
       height: 2,
