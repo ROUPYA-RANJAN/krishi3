@@ -98,10 +98,13 @@ const styles = StyleSheet.create({
   cartItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
-    backgroundColor: "#fff",
+    marginBottom: 10,
+    backgroundColor: "#E0E0E0",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 20,
+    borderWidth:3,
+    borderColor:"#E0E0E0",
+    
   },
   itemImage: {
     width: 80,
@@ -114,11 +117,10 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 17,
-    
     marginBottom: 10,
   },
   itemPrice: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     color: "black",
     marginBottom: 10,
@@ -151,6 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    paddingLeft:10,
   },
   removeButtonText: {
     color: "#fff",

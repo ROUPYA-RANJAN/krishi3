@@ -108,7 +108,7 @@ export default function Products({ navigation }: { navigation: any }) {
             {item.name}
           </Text>
           <TouchableOpacity style={styles.wishlistButton}>
-            <MaterialIcons name="favorite-border" size={24} color="red" />
+            <MaterialIcons name="favorite-border" size={30} color="red" />
           </TouchableOpacity>
         </View>
         <Text style={styles.productItemPrice}>₹{item.price.toFixed(2)}</Text>
@@ -119,7 +119,7 @@ export default function Products({ navigation }: { navigation: any }) {
             <FontAwesome
               key={index}
               name={index < Math.floor(item.rating) ? "star" : "star-o"}
-              size={16}
+              size={18}
               color="#FFD700"
             />
           ))}
@@ -137,8 +137,8 @@ export default function Products({ navigation }: { navigation: any }) {
     <View style={styles.container}>
       {/* Search Box */}
       <View style={styles.searchBox}>
-        <MaterialIcons name="search" size={22} color={"gray"} />
-        <TextInput style={styles.input} placeholder="Search for Product..." />
+        <MaterialIcons name="search" size={30} color={"gray"} />
+        <TextInput style={styles.input} placeholder="Search for Products..." />
       </View>
 
       {/* Categories Section */}
@@ -166,7 +166,7 @@ export default function Products({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "#E8E8E8",
     alignItems: "center",
     justifyContent: "flex-start",
     height: "100%",
@@ -184,11 +184,12 @@ const styles = StyleSheet.create({
     width: "90%",
     paddingHorizontal: 10,
     marginBottom: 20,
-    height: 40,
+    marginTop:10,
+    height: 50,
     backgroundColor: "#FFF",
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#DDD",
+    borderWidth: 4,
+    borderColor: "#F0F0F0",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -202,15 +203,17 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 40,
     paddingHorizontal: 10,
-    fontSize: 16,
+    fontSize: 15,
     color: "#000",
   },
   wrapper: {
-    width: "100%",
+    width: "55%",
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
+    //flexWrap: "wrap",
+    justifyContent: "center",
+   // borderWidth:3,
+   // borderColor:"#989898",
+    
   },
   circleWrapper: {
     alignItems: "center",
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
     borderRadius: 50 / 2,
   },
   textCat: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "600",
     color: "#333",
     marginTop: 10,
@@ -250,11 +253,13 @@ const styles = StyleSheet.create({
   productItemContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 5,
     backgroundColor: "#FFF",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
+    borderWidth:4,
+    borderColor:"#E0E0E0",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -265,9 +270,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   productItemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 90,
+    height: 90,
+    borderRadius: 20,
   },
   productItemDetails: {
     marginLeft: 20,

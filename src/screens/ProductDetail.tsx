@@ -168,17 +168,21 @@ const ProductDetail = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#A0A0A0",
+    
   },
   imageContainer: {
     margin: 16,
     borderRadius: 10,
     overflow: "hidden",
-    elevation: 5, // For Android shadow
+    elevation: 7, // For Android shadow
     shadowColor: "#000", // For iOS shadow
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
+    borderWidth:3,
+    borderColor:"#E0E0E0",
+    height:"35%",
   },
   image: {
     width: "100%",
@@ -187,9 +191,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#F0F0F0",
     marginHorizontal: 16,
     borderRadius: 10,
+    borderWidth:5,
+    borderColor:"#d3d3d3",
     elevation: 3, // Shadow for Android
     shadowColor: "#000", // Shadow for iOS
     shadowOffset: { width: 0, height: 2 },
@@ -254,7 +260,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: 6,
     borderRadius: 10,
     overflow: 'hidden',
   },
@@ -266,7 +272,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
     textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 0, height: 1 },
