@@ -166,7 +166,7 @@ export default function Products({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "flex-start",
     height: "100%",
@@ -248,26 +248,28 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   productListContainer: {
+    width:"100%",
     paddingBottom: 20,
   },
   productItemContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 5,
-    backgroundColor: "#E0E0E0",
+    marginBottom: 15,
+    backgroundColor: "#E8E8E8",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
-    borderWidth:4,
-    borderColor:"#C8C8C8",
-    shadowColor: "#efefef",
+   // borderWidth:4,
+    
+  //  borderColor:"#C8C8C8",
+    shadowColor: "#696969",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 4,
+      height: 5,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 7,
   },
   productItemImage: {
     width: 90,
