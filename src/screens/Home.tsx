@@ -6,15 +6,25 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  FlatList,
   ScrollView,
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Nav from "../components/Nav";
-import productsData from "../data/productsData.js"; // Assuming you have this data
-import categoriesData from "../data/categoriesData";
+import productsData from "../data/productsData"; // Assuming this data is properly imported
+import categoriesData from "../data/categoriesData"; // Assuming this data is properly imported
 
 export default function Home({ navigation }: { navigation: any }) {
   const [search, setSearch] = useState("");
+
+  // Filter products based on search
+  const filteredProducts = productsData.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const renderProductCard = ({ item }: { item: any }) => (
+    <ProductCard product={item} />
+  );
 
   return (
     <View style={styles.container}>
@@ -32,7 +42,8 @@ export default function Home({ navigation }: { navigation: any }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.scrollContent}>
+      {/* ScrollView for Content */}
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Categories Section */}
         <View style={styles.wrapper}>
           <Text style={styles.subTitle}>Categories</Text>
@@ -45,24 +56,29 @@ export default function Home({ navigation }: { navigation: any }) {
             style={styles.button}
             onPress={() => navigation.navigate("Products")}
           >
-            <Text style={styles.buttonText}>View_All</Text>
+            <Text style={styles.buttonText}>View All</Text>
           </TouchableOpacity>
         </View>
 
         {/* Products Section */}
         <View style={styles.productSection}>
           <View style={styles.productsHeader}>
-            <Text style={styles.sectionTitle}>Products_Near_You</Text>
+            <Text style={styles.sectionTitle}>Products Near You</Text>
             <TouchableOpacity style={styles.sortButton}>
               <MaterialIcons name="sort" size={20} color="white" />
-              <Text style={styles.sortButtonText}>Sort_by_Location</Text>
+              <Text style={styles.sortButtonText}>Sort by Location</Text>
             </TouchableOpacity>
           </View>
-          {productsData
-            .sort((a, b) => a.location.localeCompare(b.location))
-            .map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+
+          {/* FlatList for Products */}
+          <FlatList
+            data={filteredProducts.sort((a, b) =>
+              a.location.localeCompare(b.location)
+            )}
+            renderItem={renderProductCard}
+            keyExtractor={(item) => item.id.toString()} // Convert id to string
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       </ScrollView>
 
@@ -71,11 +87,11 @@ export default function Home({ navigation }: { navigation: any }) {
   );
 }
 
-function Categories({ data, navigation }: { data: any, navigation: any }) {
+function Categories({ data, navigation }: { data: any; navigation: any }) {
   return (
     <TouchableOpacity
       style={styles.categoryButton}
-      onPress={() => navigation.navigate("Products")}
+      onPress={() => navigation.navigate("Products", { categoryId: data.id })}
     >
       <Image style={styles.categoryIcon} source={data.image} />
       <Text style={styles.categoryText}>{data.name}</Text>
@@ -92,11 +108,12 @@ function ProductCard({ product }: { product: any }) {
           {product.name}
         </Text>
         <Text style={styles.productLocation}>{product.location}</Text>
-        <Text style={styles.productDate}>Posted_on: {product.date}</Text>
-        <Text style={styles.productPrice}>₹{product.price}</Text> {/* Added Rupees symbol */}
+        <Text style={styles.productDate}>Posted on: {product.date}</Text>
+        <Text style={styles.productPrice}>₹{product.price}</Text>
       </View>
       <TouchableOpacity style={styles.likeButton}>
         <MaterialIcons name="favorite-border" size={24} color="red" />
+        <Text>Like</Text>
       </TouchableOpacity>
     </View>
   );
@@ -142,9 +159,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 15,
   },
-  scrollContent: {
-    paddingBottom: 100,
-  },
   wrapper: {
     backgroundColor: "#FFF",
     borderRadius: 10,
@@ -158,11 +172,11 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     color: "#333",
     marginBottom: 15,
-    textAlign: 'left',
-    width: '100%',
+    textAlign: "left",
+    width: "100%",
   },
   categoriesGrid: {
     flexDirection: "row",
@@ -176,7 +190,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    width: "47%", // Adjusted for two columns
+    width: "47%",
     height: 140,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -191,13 +205,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 3,
     borderColor: "#DDD",
-  
   },
   categoryText: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#5C3C92", // Innovative color for text
-    fontFamily: "Roboto", // Beautiful and innovative font style
+    color: "#5C3C92",
   },
   button: {
     backgroundColor: "#FF5722",
@@ -271,7 +283,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 5,
     color: "#333",
-    textTransform: "capitalize",
   },
   productLocation: {
     fontSize: 14,
@@ -279,15 +290,18 @@ const styles = StyleSheet.create({
   },
   productDate: {
     fontSize: 12,
-    color: "#888",
+    color: "#777",
     marginTop: 5,
   },
   productPrice: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#35C759",
+    fontWeight: "600",
+    color: "#E91E63",
+    marginTop: 5,
   },
   likeButton: {
-    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
