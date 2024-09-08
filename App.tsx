@@ -46,11 +46,11 @@ export default function App() {
         initialRouteName="Splash"
         screenOptions={{
           headerStyle: {
-            height: 90,
+            height: 70,
             },
           headerBackground: () => (
             <LinearGradient
-              colors={["#4c669f", "#3b5998", "#192f6a"]}
+              colors={["#2874F0","#2874F0", "#2874F0"]}
               style={styles.headerGradient}
               start={[0, 0]}
               end={[1, 1]}
@@ -148,6 +148,7 @@ export default function App() {
 const styles = StyleSheet.create({
   headerGradient: {
     flex: 1,
+    borderRadius: 2,
   },
   logo: {
     width: 120,

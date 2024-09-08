@@ -37,7 +37,11 @@ export default function Home({ navigation }: { navigation: any }) {
           value={search}
           onChangeText={(text) => setSearch(text)}
         />
-        <TouchableOpacity style={styles.cartButton}>
+        <TouchableOpacity style={styles.cartButton} 
+          
+          onPress={() => navigation.navigate("Cart")}
+          accessibilityLabel="View Cart"
+        >
           <MaterialIcons name="shopping-cart" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -82,7 +86,7 @@ export default function Home({ navigation }: { navigation: any }) {
         </View>
       </ScrollView>
 
-      <Nav navigation={navigation} />
+      <Nav navigation={navigation} isLoggedIn={false} />
     </View>
   );
 }
@@ -195,7 +199,7 @@ borderRadius: 20,
     justifyContent: "center",  //space-between
   },
   categoryButton: {
-    backgroundColor: "#ceff94",
+    backgroundColor: "#F0F0F0",
     padding: 15,
     margin: 10,
     borderRadius: 15,
@@ -225,7 +229,7 @@ borderRadius: 20,
   button: {
     backgroundColor: "#FF5722",
     padding: 15,
-    borderRadius: 20,
+    borderRadius: 40,
     marginTop: 20,
     width: "100%",
     alignItems: "center",
@@ -244,15 +248,16 @@ borderRadius: 20,
     marginTop: 10,
   },
   productsHeader: {
-   // flexDirection: "row",
+    flexDirection: "row",
     justifyContent: "space-between",
   alignItems: "center",
-  width: "70%",
-   marginLeft: 50,
+  
+  width: "90%",
+   marginLeft: 10,
     marginBottom: 10,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: "700",
     color: "#333",
   },
@@ -262,9 +267,11 @@ borderRadius: 20,
     borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
+    marginLeft:10,
   },
   sortButtonText: {
     color: "#FFF",
+    fontSize:12,
     fontWeight: "600",
     marginLeft: 5,
   },

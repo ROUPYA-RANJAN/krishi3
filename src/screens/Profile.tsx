@@ -29,7 +29,11 @@ export default function Profile ({navigation}: { navigation :any}) {
           <Text style={styles.buttonText}>Edit Profile</Text>
         </TouchableOpacity>
       </View>
-      <Nav navigation={navigation} />
+      <TouchableOpacity style={styles.button2}>
+          <Text style={styles.button2Text}>Log out</Text>
+        </TouchableOpacity>
+      
+      <Nav navigation={navigation} isLoggedIn={false} />
     </View>
   );
 };
@@ -86,7 +90,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#33c37d",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  button2: {
+    backgroundColor: "#EF0107",
+    padding: 10,
+    borderRadius: 10,
     marginTop: 20,
   },
   buttonText: {
@@ -94,5 +104,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 18,
+  },
+  button2Text: {
+    color: "#fff",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 16,
   },
 });

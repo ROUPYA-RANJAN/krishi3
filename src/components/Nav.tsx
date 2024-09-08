@@ -16,7 +16,7 @@ export default function Nav({ navigation }: NavProps) {
         onPress={() => navigation.navigate("Home")}
         accessibilityLabel="Go to Home"
       >
-        <MaterialIcons name="home" size={24} color="black" />
+        <MaterialIcons name="home" size={30} color="black" />
         <Text style={styles.title}>Home</Text>
       </TouchableOpacity>
 
@@ -25,26 +25,19 @@ export default function Nav({ navigation }: NavProps) {
         onPress={() => navigation.navigate("Products")}
         accessibilityLabel="View Products"
       >
-        <MaterialIcons name="grass" size={24} color="black" />
+        <MaterialIcons name="grass" size={30} color="black" />
         <Text style={styles.title}>Products</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.navItem}
-        onPress={() => navigation.navigate("Cart")}
-        accessibilityLabel="View Cart"
-      >
-        <MaterialIcons name="shopping-cart" size={24} color="black" />
-        <Text style={styles.title}>Cart</Text>
-      </TouchableOpacity>
+     
 
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("AddProduct")}
         accessibilityLabel="Add Product"
       >
-        <MaterialIcons name="add-box" size={24} color="black" />
-        <Text style={styles.title}>Add Product</Text>
+        <MaterialIcons name="add-box" size={30} color="black" />
+        <Text style={styles.title}>Add Item</Text>
       </TouchableOpacity>
 
       {isLoggedIn && (
@@ -53,7 +46,7 @@ export default function Nav({ navigation }: NavProps) {
           onPress={() => navigation.navigate("Profile")}
           accessibilityLabel="View Profile"
         >
-          <MaterialIcons name="person" size={24} color="black" />
+          <MaterialIcons name="person" size={30} color="black" />
           <Text style={styles.title}>My Profile</Text>
         </TouchableOpacity>
       )}
@@ -89,8 +82,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     marginTop: 2,
+    fontWeight: "700",
     color: "#333",
   },
 });
