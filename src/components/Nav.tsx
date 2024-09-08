@@ -1,39 +1,62 @@
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native';
 import React from 'react';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { TouchableOpacity } from 'react-native';
 
-export default function Nav({ navigation }: { navigation: any }) {
+interface NavProps {
+  navigation: any;
+  isLoggedIn: boolean;
+}
+
+export default function Nav({ navigation }: NavProps) {
+  const isLoggedIn = true; // Temporarily set to true for testing
   return (
     <View style={styles.nav}>
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("Home")}
+        accessibilityLabel="Go to Home"
       >
-        <MaterialIcons name="home" size={24} color={"black"} />
+        <MaterialIcons name="home" size={24} color="black" />
         <Text style={styles.title}>Home</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("Products")}
+        accessibilityLabel="View Products"
       >
-        <MaterialIcons name="grass" size={24} color={"black"} />
-        <Text style={styles.title}>Product</Text>
+        <MaterialIcons name="grass" size={24} color="black" />
+        <Text style={styles.title}>Products</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate("Cart")}
+        accessibilityLabel="View Cart"
       >
-        <MaterialIcons name="shopping-cart" size={24} color={"black"} />
+        <MaterialIcons name="shopping-cart" size={24} color="black" />
         <Text style={styles.title}>Cart</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => navigation.navigate("AddProduct")}
+        accessibilityLabel="Add Product"
       >
-        <MaterialIcons name="person" size={24} color={"black"} />
-        <Text style={styles.title}>My Profile</Text>
+        <MaterialIcons name="add-box" size={24} color="black" />
+        <Text style={styles.title}>Add Product</Text>
       </TouchableOpacity>
+
+      {isLoggedIn && (
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Profile")}
+          accessibilityLabel="View Profile"
+        >
+          <MaterialIcons name="person" size={24} color="black" />
+          <Text style={styles.title}>My Profile</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -43,18 +66,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    //paddingVertical: 10,
     backgroundColor: "#fff",
     borderTopColor: "lightgray",
     borderTopWidth: 1,
     borderRadius: 20,
-    marginBottom: 0,
-    paddingTop:5,
-    paddingBottom:10,
+    paddingVertical: Platform.OS === 'ios' ? 10 : 5,
     width: "100%",
     position: "absolute",
-    bottom: 0, // Keep it pinned at the bottom
-    height: Platform.OS === 'ios' ? 70 : 60, // Adjust for iOS/Android
+    bottom: 0,
+    height: Platform.OS === 'ios' ? 70 : 60,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -71,5 +91,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     marginTop: 2,
+    color: "#333",
   },
 });

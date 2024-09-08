@@ -1,58 +1,31 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import React, { useState } from "react";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
-import { Logo } from "../../assets";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Logo } from "../../assets"; // Ensure the logo path is correct
 
-export default function Welcome() {
-  const [isLogin, setIsLogin] = useState(false);
+const { width, height } = Dimensions.get("window"); // Get device width and height for responsive design
+
+export default function Welcome({ navigation }: { navigation: any }) {
+  const [isLogin, setIsLogin] = useState(true); // Start with Login screen by default
 
   return (
     <View style={styles.wrapper}>
-      <Image source={Logo} style={styles.img} />
-      <View style={styles.container}>
-        <View style={styles.signup}>
-          <Text
-            style={{
-              fontSize: isLogin ? 32 : 24,
-              fontWeight: "bold",
-              marginBottom: 20,
-            }}
-            onPress={() => setIsLogin(true)}
-          >
-            Sign Up
+      <Image source={Logo} style={styles.logo} />
+      <View style={styles.card}>
+        <Text style={styles.title}>{isLogin ? "Login" : "Create Your Account"}</Text>
+        {isLogin ? (
+          <Login navigation={navigation} />
+        ) : (
+          <Signup navigation={navigation} />
+        )}
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchText}>
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
+              <Text style={styles.switchLink}>{isLogin ? "Sign Up" : "Login"}</Text>
+            </TouchableOpacity>
           </Text>
-          <Signup />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            bottom: isLogin ? -340 : 0,
-            width: "100%",
-            height: 430,
-            backgroundColor: "forestgreen",
-            paddingBottom: 100,
-            gap: 20,
-            borderTopLeftRadius: 100,
-            borderTopRightRadius: 100,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: isLogin ? 24 : 32,
-              fontWeight: "bold",
-              marginBottom: 20,
-              color: "white",
-            }}
-            onPress={() => setIsLogin(false)}
-          >
-            Login
-          </Text>
-          <Login />
         </View>
       </View>
     </View>
@@ -63,25 +36,46 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f5f5f5",
+    paddingHorizontal: 20, // Ensure some padding on the sides
   },
-  container: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: 550,
-    // borderTopStartRadius: 900 / 5,
+  logo: {
+    width: width * 0.35, // Smaller logo size (35% of screen width)
+    height: width * 0.35, // Maintain aspect ratio
+    marginBottom: 20, // Reduced margin for better spacing
   },
-  img: {
-    width: 300,
-    height: 300,
-    marginTop: 100,
-  },
-  signup: {
-    flex: 1,
+  card: {
+    width: "100%", // Full width on mobile
+    maxWidth: 380, // Limit width on larger screens
+    height: height * 0.7, // Increased card height to take more than half of the screen
+    padding: 30, // More padding inside the card
+    backgroundColor: "#fff",
+    borderRadius: 15, // Rounded corners for card effect
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 7,
+    elevation: 8, // Increased shadow for Android
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
-    paddingBottom: 70,
-    gap: 20,
+  },
+  title: {
+    fontSize: 28, // Slightly larger title
+    fontWeight: "700",
+    marginBottom: 20,
+    color: "#333",
+  },
+  switchContainer: {
+    marginTop: 25, // Adjusted margin for better spacing
+  },
+  switchText: {
+    fontSize: 16, // Adjusted text size for readability
+    color: "#666",
+  },
+  switchLink: {
+    fontWeight: "600",
+    color: "#007bff",
+    textDecorationLine: "underline",
   },
 });
