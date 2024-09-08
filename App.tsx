@@ -1,10 +1,8 @@
-// App.tsx
-
 import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
-import { NavigationContainer, DefaultTheme, DarkTheme, Theme } from '@react-navigation/native';
-import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
+import { NavigationContainer, DefaultTheme, Theme } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -19,25 +17,11 @@ import Payment from './src/screens/Payment';
 import Contact from './src/screens/Contact';
 import Products from './src/screens/Products';
 import Profile from './src/screens/Profile';
+import AddProduct from './src/screens/AddProduct'; // AddProduct screen
 
-// Define the type for the stack navigator
-type RootStackParamList = {
-  Splash: undefined;
-  Welcome: undefined;
-  Home: undefined;
-  Profile: undefined;
-  Products: undefined;
-  ProductDetail: { productId: string };
-  Cart: undefined;
-  Payment: undefined;
-  Contact: undefined;
-  FarmerProfile: { farmerId: string };
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 export default function App() {
-  // Define a custom theme (optional)
   const MyTheme: Theme = {
     ...DefaultTheme,
     colors: {
@@ -51,8 +35,8 @@ export default function App() {
       <StatusBar backgroundColor="transparent" translucent barStyle="dark-content" />
 
       <Stack.Navigator
+        initialRouteName="Splash"
         screenOptions={{
-          // Custom header with gradient background and logo
           headerBackground: () => (
             <LinearGradient
               colors={['#4c669f', '#3b5998', '#192f6a']}
@@ -66,20 +50,24 @@ export default function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 20,
-            // You can add a custom font here if desired
           },
         }}
       >
+        {/* Splash Screen */}
         <Stack.Screen
           name="Splash"
           component={Splash}
           options={{ headerShown: false }}
         />
+
+        {/* Welcome Screen */}
         <Stack.Screen
           name="Welcome"
           component={Welcome}
-          options={{ title: 'Welcome' }}
+          options={{ headerShown: false }}
         />
+
+        {/* Home Screen */}
         <Stack.Screen
           name="Home"
           component={Home}
@@ -97,21 +85,40 @@ export default function App() {
             ),
             headerTitle: () => (
               <Image
-                source={{ uri: 'https://your-logo-url.com/logo.png' }} // Replace with your logo URL or require statement
+                source={{ uri: 'https://your-logo-url.com/logo.png' }}
                 style={styles.logo}
                 resizeMode="contain"
               />
             ),
           })}
         />
+
+        {/* Other screens */}
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Products" component={Products} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Contact" component={Contact} />
-        {/* Uncomment if needed */}
-        {/* <Stack.Screen name="FarmerProfile" component={FarmerProfile} /> */}
+
+        {/* Add Product Screen */}
+        <Stack.Screen
+          name="AddProduct"
+          component={AddProduct}
+          options={({ navigation }) => ({
+            title: "Add Product",
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate("AddProduct")}>
+                <MaterialIcons
+                  name="add-circle-outline"
+                  size={24}
+                  color="#fff"
+                  style={styles.contact}
+                />
+              </TouchableOpacity>
+            ),
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -121,14 +128,11 @@ const styles = StyleSheet.create({
   headerGradient: {
     flex: 1,
   },
-  contact: {
-    marginRight: 20,
-    padding: 4,
-    backgroundColor: "#35C759",
-    borderRadius: 9999,
-  },
   logo: {
-    width: 150,
+    width: 120,
     height: 40,
+  },
+  contact: {
+    marginRight: 10,
   },
 });
