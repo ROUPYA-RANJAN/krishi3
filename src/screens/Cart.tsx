@@ -8,15 +8,15 @@ export default function Cart({ navigation }: { navigation: any}) {
       id: 1,
       name: 'Organic Apples',
       image: Fruits,
-      price: 110,
-      quantity: 2,
+      price: 150,
+      quantity: 1,
     },
     {
       id: 2,
-      name: 'Fresh Carrots',
+      name: 'Fresh Tomatoes',
       image: Vegetables,
-      price: 60,
-      quantity: 3,
+      price: 35,
+      quantity: 1,
     },
   ]);
 
@@ -98,13 +98,10 @@ const styles = StyleSheet.create({
   cartItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
-    backgroundColor: "#E0E0E0",
+    marginBottom: 20,
+    backgroundColor: "#fff",
     padding: 20,
-    borderRadius: 20,
-    borderWidth:3,
-    borderColor:"#E0E0E0",
-    
+    borderRadius: 5,
   },
   itemImage: {
     width: 80,
@@ -117,10 +114,11 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 17,
+    
     marginBottom: 10,
   },
   itemPrice: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
     color: "black",
     marginBottom: 10,
@@ -153,7 +151,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    paddingLeft:10,
   },
   removeButtonText: {
     color: "#fff",
