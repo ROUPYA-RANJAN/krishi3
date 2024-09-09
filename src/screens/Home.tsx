@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Nav from "../components/Nav";
-import productsData from "../data/productsData"; // Assuming this data is properly imported
-import categoriesData from "../data/categoriesData"; // Assuming this data is properly imported
+import productsData from "../data/productsData";
+import categoriesData from "../data/categoriesData";
 
 export default function Home({ navigation }: { navigation: any }) {
   const [search, setSearch] = useState("");
@@ -37,8 +37,8 @@ export default function Home({ navigation }: { navigation: any }) {
           value={search}
           onChangeText={(text) => setSearch(text)}
         />
-        <TouchableOpacity style={styles.cartButton} 
-          
+        <TouchableOpacity
+          style={styles.cartButton}
           onPress={() => navigation.navigate("Cart")}
           accessibilityLabel="View Cart"
         >
@@ -47,7 +47,7 @@ export default function Home({ navigation }: { navigation: any }) {
       </View>
 
       {/* ScrollView for Content */}
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
         {/* Categories Section */}
         <View style={styles.wrapper}>
           <Text style={styles.subTitle}>Categories</Text>
@@ -70,7 +70,7 @@ export default function Home({ navigation }: { navigation: any }) {
             <Text style={styles.sectionTitle}>Products Near You</Text>
             <TouchableOpacity style={styles.sortButton}>
               <MaterialIcons name="sort" size={20} color="white" />
-              <Text style={styles.sortButtonText }>Sort by Location</Text>
+              <Text style={styles.sortButtonText}>Sort by Location</Text>
             </TouchableOpacity>
           </View>
 
@@ -104,6 +104,18 @@ function Categories({ data, navigation }: { data: any; navigation: any }) {
 }
 
 function ProductCard({ product }: { product: any }) {
+  const [liked, setLiked] = useState(false);
+
+  const handleLikePress = () => {
+    setLiked(!liked);
+  };
+
+  const formattedDate = new Date(product.postedOn).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <View style={styles.productCard}>
       <Image style={styles.productImage} source={product.image} />
@@ -112,12 +124,18 @@ function ProductCard({ product }: { product: any }) {
           {product.name}
         </Text>
         <Text style={styles.productLocation}>{product.location}</Text>
-        <Text style={styles.productDate}>Posted on: {product.date}</Text>
-        <Text style={styles.productPrice}>₹{product.price}</Text>
+        <Text style={styles.productDate}>Posted on: {formattedDate}</Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.productPrice}>₹{product.price}</Text>
+          <Text style={styles.pricePerKg}>/kg</Text>
+        </View>
       </View>
-      <TouchableOpacity style={styles.likeButton}>
-        <MaterialIcons name="favorite-border" size={24} color="red" />
-        <Text></Text>
+      <TouchableOpacity style={styles.likeButton} onPress={handleLikePress}>
+        <MaterialIcons
+          name={liked ? "favorite" : "favorite-border"}
+          size={24}
+          color={liked ? "red" : "gray"}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -128,8 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F0F0F0",
     paddingTop: 10,
-    
-    
   },
   header: {
     flexDirection: "row",
@@ -138,11 +154,9 @@ const styles = StyleSheet.create({
     width: "94%",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    marginLeft:10,
+    marginLeft: 10,
     marginRight: 20,
-    alignContent:"center",
-  
-    
+    alignContent: "center",
     backgroundColor: "#2874F0",
     borderRadius: 17,
     marginBottom: 10,
@@ -150,13 +164,13 @@ const styles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
-borderRadius: 20,
-},
+    borderRadius: 20,
+  },
   searchInput: {
     flex: 1,
     height: 40,
     marginHorizontal: 10,
-    fontWeight:"400",
+    fontWeight: "400",
     borderRadius: 20,
     paddingHorizontal: 15,
     backgroundColor: "#FFF",
@@ -167,10 +181,8 @@ borderRadius: 20,
     backgroundColor: "#35C759",
     borderRadius: 20,
   },
-  content: {
-    flex: 1,
-    width: "100%",
-    paddingHorizontal: 15,
+  scrollViewContent: {
+    paddingBottom: 60, // Ensure enough space for navigation
   },
   wrapper: {
     backgroundColor: "#FFF",
@@ -178,14 +190,12 @@ borderRadius: 20,
     padding: 10,
     marginBottom: 10,
     shadowColor: "#000",
-    
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
   subTitle: {
-   
     fontSize: 20,
     fontWeight: "700",
     color: "#333",
@@ -196,7 +206,7 @@ borderRadius: 20,
   categoriesGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",  //space-between
+    justifyContent: "center",
   },
   categoryButton: {
     backgroundColor: "#F0F0F0",
@@ -250,10 +260,9 @@ borderRadius: 20,
   productsHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-  alignItems: "center",
-  
-  width: "90%",
-   marginLeft: 10,
+    alignItems: "center",
+    width: "90%",
+    marginLeft: 10,
     marginBottom: 10,
   },
   sectionTitle: {
@@ -267,11 +276,11 @@ borderRadius: 20,
     borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
-    marginLeft:10,
+    marginLeft: 10,
   },
   sortButtonText: {
     color: "#FFF",
-    fontSize:12,
+    fontSize: 12,
     fontWeight: "600",
     marginLeft: 5,
   },
@@ -280,12 +289,10 @@ borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingLeft:10,
-    padding:5,
-    width:"95%",
+    paddingLeft: 10,
+    padding: 5,
+    width: "95%",
     marginLeft: 10,
-   
-
     marginBottom: 15,
     borderRadius: 20,
     shadowColor: "#000",
@@ -293,43 +300,50 @@ borderRadius: 20,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    zIndex: 1, // Ensure product card is on top
   },
   productImage: {
-    width: 90,
-    height: 90,
-    borderRadius: 15,
+    width: 80,
+    height: 80,
+    borderRadius: 10,
   },
   productDetails: {
     flex: 1,
-    marginLeft: 15,
+    marginLeft: 10,
+    marginRight: 10,
   },
   productName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "600",
-    marginBottom: 0,
     color: "#333",
   },
   productLocation: {
     fontSize: 14,
-    flexDirection: "row",
-    fontWeight: "500",
-    color: "#777",
+    color: "#888",
   },
   productDate: {
     fontSize: 12,
-    color: "#777",
+    color: "#888",
+    marginVertical: 5,
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 5,
   },
   productPrice: {
     fontSize: 16,
     fontWeight: "600",
     color: "#E91E63",
-    marginTop: 5,
+  },
+  pricePerKg: {
+    fontSize: 14,
+    fontWeight: "300",
+    color: "#E91E63",
+    marginLeft: 5,
   },
   likeButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    margin:10,
+    padding: 5,
   },
+  
 });
