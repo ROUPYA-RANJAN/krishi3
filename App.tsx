@@ -22,6 +22,7 @@ import Contact from "./src/screens/Contact";
 import Products from "./src/screens/Products";
 import Profile from "./src/screens/Profile";
 import AddProduct from "./src/screens/AddProduct"; // AddProduct screen
+import Settings from './src/screens/Settings'; // Import Settings screen
 
 const Stack = createStackNavigator();
 
@@ -46,11 +47,11 @@ export default function App() {
         initialRouteName="Splash"
         screenOptions={{
           headerStyle: {
-            height: 70,
+            height: 90,
             },
           headerBackground: () => (
             <LinearGradient
-              colors={["#2874F0","#2874F0", "#2874F0"]}
+              colors={["#4c669f", "#3b5998", "#192f6a"]}
               style={styles.headerGradient}
               start={[0, 0]}
               end={[1, 1]}
@@ -95,7 +96,7 @@ export default function App() {
           })}
         />
 
-        {/* Other screens */}
+        {/* Profile Screen */}
         <Stack.Screen
           name="Profile"
           component={Profile}
@@ -114,6 +115,15 @@ export default function App() {
             ),
           })}
         />
+
+        {/* Settings Screen */}
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{ title: "Settings" }}
+        />
+
+        {/* Other Screens */}
         <Stack.Screen name="Products" component={Products} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
@@ -148,7 +158,6 @@ export default function App() {
 const styles = StyleSheet.create({
   headerGradient: {
     flex: 1,
-    borderRadius: 2,
   },
   logo: {
     width: 120,
