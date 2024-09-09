@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, Alert, StyleSheet, ScrollView, Image, TouchableOpacity, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { MaterialIcons } from '@expo/vector-icons';  // Import the icon
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 const AddProduct: React.FC = () => {
   const [category, setCategory] = useState<string>(''); // Category selected by user
@@ -9,6 +9,7 @@ const AddProduct: React.FC = () => {
   const [productPrice, setProductPrice] = useState<string>('');
   const [productQuantity, setProductQuantity] = useState<string>('');
   const [imageUri, setImageUri] = useState<string | null>(null); // Image URI
+  const [products, setProducts] = useState<any[]>([]); // Array to store added products
 
   const handleAddProduct = () => {
     if (!productName.trim() || !productPrice.trim() || !productQuantity.trim()) {
@@ -16,11 +17,19 @@ const AddProduct: React.FC = () => {
       return;
     }
 
-    // Handle product addition logic here
-    Alert.alert(
-      'Success',
-      `${productName} has been added with a price of ₹${productPrice} and quantity ${productQuantity}`
-    );
+    const newProduct = {
+      id: Math.random().toString(),
+      name: productName,
+      price: productPrice,
+      quantity: productQuantity,
+      image: imageUri,
+      category,
+    };
+
+    // Add the new product to the array
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+
+    Alert.alert('Success', `${productName} has been added.`);
 
     // Clear input fields after adding product
     setCategory('');
@@ -43,17 +52,35 @@ const AddProduct: React.FC = () => {
     }
   };
 
+  const handleRemoveProduct = (id: string) => {
+    setProducts((prevProducts) => prevProducts.filter(product => product.id !== id));
+    Alert.alert('Success', 'Product removed.');
+  };
+
+  const renderProduct = ({ item }: { item: any }) => (
+    <View style={styles.productCard}>
+      <Image source={{ uri: item.image }} style={styles.productImage} />
+      <View style={styles.productDetails}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text style={styles.productPrice}>₹{item.price}</Text>
+        <Text style={styles.productQuantity}>Qty: {item.quantity}</Text>
+        <Text style={styles.productCategory}>Category: {item.category}</Text>
+      </View>
+      <TouchableOpacity onPress={() => handleRemoveProduct(item.id)} style={styles.removeButton}>
+        <Ionicons name="trash-outline" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Removed the Add New Product text */}
-      
-      {/* Changed Category: name to Product Category: name and moved it to the top */}
-      {category && (
-        <Text style={styles.subHeader}>Product Category: {category.charAt(0).toUpperCase() + category.slice(1)}</Text>
-      )}
+      {/* Header */}
+      <Text style={styles.header}>Add New Product</Text>
 
-      {/* Show category images if no category has been selected */}
-      {!category && (
+      {/* Category Section */}
+      {category ? (
+        <Text style={styles.subHeader}>Product Category: {category.charAt(0).toUpperCase() + category.slice(1)}</Text>
+      ) : (
         <View style={styles.categoryImages}>
           <TouchableOpacity onPress={() => setCategory('fruit')} style={styles.categoryContainer}>
             <Image source={require('../../assets/categories/fruits.jpeg')} style={styles.categoryImage} />
@@ -74,7 +101,7 @@ const AddProduct: React.FC = () => {
         </View>
       )}
 
-      {/* Once a category is selected, show the form */}
+      {/* Form Section */}
       {category && (
         <>
           <TextInput
@@ -84,20 +111,18 @@ const AddProduct: React.FC = () => {
             onChangeText={setProductName}
           />
 
-          {/* Added a camera icon beside Add Picture button */}
           <TouchableOpacity style={styles.addPictureButton} onPress={pickImage}>
             <MaterialIcons name="camera-alt" size={20} color="white" />
             <Text style={styles.addPictureText}> Add Picture</Text>
           </TouchableOpacity>
 
-          {/* Enlarged image container with more padding */}
           {imageUri && (
             <Image source={{ uri: imageUri }} style={styles.image} />
           )}
 
           <TextInput
             style={styles.input}
-            placeholder={`Enter price per ${category === 'dairy' ? 'litre' : category === 'grains' ? '100 grams' : 'kg'}`}
+            placeholder={`Enter price per ${category === 'dairy' ? 'litre' : category === 'grains' ? 'kg' : 'kg'}`}
             value={productPrice}
             onChangeText={setProductPrice}
             keyboardType="numeric"
@@ -111,7 +136,23 @@ const AddProduct: React.FC = () => {
             keyboardType="numeric"
           />
 
-          <Button title="Add Product" onPress={handleAddProduct} color="#4CAF50" />
+          <TouchableOpacity style={styles.addButton} onPress={handleAddProduct}>
+            <Text style={styles.addButtonText}>Add Product</Text>
+          </TouchableOpacity>
+        </>
+      )}
+
+      {/* Previously Added Products Section */}
+      {products.length > 0 && (
+        <>
+          <Text style={styles.sectionHeader}>Previously Added Products</Text>
+          <FlatList
+            data={products}
+            renderItem={renderProduct}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.productList}
+            showsVerticalScrollIndicator={false}
+          />
         </>
       )}
     </ScrollView>
@@ -123,29 +164,41 @@ export default AddProduct;
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#e0f7fa', // Changed background color
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#00796b',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   subHeader: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 20, // Increased margin to move it to the top
+    marginBottom: 20,
     textAlign: 'center',
+    color: '#004d40',
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
+    height: 45,
+    borderColor: '#00796b',
     borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
+    borderRadius: 12, // Rounded corners
+    paddingHorizontal: 15,
     marginBottom: 15,
+    backgroundColor: '#ffffff',
+    elevation: 2, // Shadow for input fields
   },
   image: {
-    width: 190, // Increased size
-    height: 190, // Increased size
-    borderRadius: 10,
-    marginBottom: 20, // Added more margin for space between Add Picture and Enter price
+    width: 200,
+    height: 200,
+    borderRadius: 15,
+    marginBottom: 20,
     alignSelf: 'center',
+    borderColor: '#00796b',
+    borderWidth: 1,
   },
   categoryImages: {
     flexDirection: 'row',
@@ -156,28 +209,109 @@ const styles = StyleSheet.create({
   categoryContainer: {
     width: '48%',
     marginBottom: 20,
+    borderRadius: 12, // Rounded corners
+    overflow: 'hidden',
+    backgroundColor: '#ffffff',
+    elevation: 3, // Shadow for category containers
   },
   categoryImage: {
     width: '100%',
-    height: 100,
-    borderRadius: 10,
+    height: 120,
   },
   categoryLabel: {
     textAlign: 'center',
-    marginTop: 5,
-    fontWeight: 'bold',
+    marginTop: 8,
+    marginBottom: 8,
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#00796b',
   },
   addPictureButton: {
-    flexDirection: 'row',  // To align icon and text in a row
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    borderRadius: 5,
+    flexDirection: 'row',
+    backgroundColor: '#00796b',
+    padding: 12,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,  // Added space after the Add Picture button
+    marginBottom: 20,
+    elevation: 3, // Shadow for button
   },
   addPictureText: {
     color: 'white',
-    marginLeft: 10, // Space between the icon and text
+    fontWeight: '600',
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  addButton: {
+    backgroundColor: '#4CAF50', // Green background for Add Product button
+    paddingVertical: 12,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 15,
+    elevation: 3, // Shadow for button
+  },
+  addButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  sectionHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#00796b',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  productList: {
+    paddingBottom: 20,
+  },
+  productCard: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    borderRadius: 12, // Rounded corners
+    padding: 15,
+    marginBottom: 15,
+    elevation: 4, // Shadow for product card
+    position: 'relative',
+  },
+  productImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 12, // Rounded corners
+    marginRight: 15,
+  },
+  productDetails: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#4CAF50',
+    marginTop: 5,
+  },
+  productQuantity: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 3,
+  },
+  productCategory: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 3,
+  },
+  removeButton: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+    backgroundColor: '#d32f2f',
+    borderRadius: 50,
+    padding: 5,
+    elevation: 4, // Shadow for remove button
   },
 });
