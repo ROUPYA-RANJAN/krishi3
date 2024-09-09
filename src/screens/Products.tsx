@@ -9,129 +9,75 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import categoriesData from "../data/categoriesData";
-import { Vegetables, Fruits, Dairy } from "../../assets";
+import productsData from "../data/productsData";
 import Nav from "../components/Nav";
-import { LinearGradient } from "expo-linear-gradient"; // Importing LinearGradient
-import { FontAwesome } from "@expo/vector-icons"; // Importing FontAwesome for star ratings
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Products({ navigation }: { navigation: any }) {
-  const [products, setProducts] = useState([
-    {
-      id: "1",
-      name: "Tomatoes",
-      price: 40,
-      image: Vegetables,
-      category: "Vegetables",
-      location: "Mumbai, Maharashtra",
-      rating: 4.5,
-    },
-    {
-      id: "2",
-      name: "Apples",
-      price: 120,
-      image: Fruits,
-      category: "Fruits",
-      location: "Shimla, Himachal Pradesh",
-      rating: 4.7,
-    },
-    {
-      id: "3",
-      name: "Potatoes",
-      price: 25,
-      image: Vegetables,
-      category: "Vegetables",
-      location: "Agra, Uttar Pradesh",
-      rating: 4.2,
-    },
-    {
-      id: "4",
-      name: "Carrots",
-      price: 50,
-      image: Vegetables,
-      category: "Vegetables",
-      location: "Nagpur, Maharashtra",
-      rating: 4.6,
-    },
-    {
-      id: "5",
-      name: "Paneer",
-      price: 200,
-      image: Dairy,
-      category: "Dairy",
-      location: "Jaipur, Rajasthan",
-      rating: 4.8,
-    },
-    {
-      id: "6",
-      name: "Lettuce",
-      price: 80,
-      image: Vegetables,
-      category: "Vegetables",
-      location: "Pune, Maharashtra",
-      rating: 4.3,
-    },
-    {
-      id: "7",
-      name: "Bananas",
-      price: 40,
-      image: Fruits,
-      category: "Fruits",
-      location: "Kolkata, West Bengal",
-      rating: 4.1,
-    },
-  ]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [likedProducts, setLikedProducts] = useState<string[]>([]);
 
-  const Categories = ({ data }: { data: any }) => {
-    return (
-      <TouchableOpacity style={styles.circleWrapper}>
-        <LinearGradient
-          colors={["#FFDEE9", "#B5FFFC"]} // Gradient background for categories
-          style={styles.gradientCircle}
-        >
-          <Image source={data.image} style={styles.img} />
-        </LinearGradient>
-        <Text style={styles.textCat}>{data.name}</Text>
-      </TouchableOpacity>
+  const handleCategoryPress = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleLikePress = (id: string) => {
+    setLikedProducts((prevLiked) =>
+      prevLiked.includes(id)
+        ? prevLiked.filter((productId) => productId !== id) // Unlike
+        : [...prevLiked, id] // Like
     );
   };
 
-  const renderProductItem = ({ item }: { item: any }) => (
-    <TouchableOpacity
-      style={styles.productItemContainer}
-      onPress={() => navigation.navigate("ProductDetail")}
-    >
-      <Image style={styles.productItemImage} source={item.image} />
-      <View style={styles.productItemDetails}>
-        <View style={styles.productItemHeader}>
-          <Text style={styles.productItemName} numberOfLines={1}>
-            {item.name}
-          </Text>
-          <TouchableOpacity style={styles.wishlistButton}>
-            <MaterialIcons name="favorite-border" size={30} color="red" />
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.productItemPrice}>₹{item.price.toFixed(2)}</Text>
+  const filteredProducts = selectedCategory
+    ? productsData.filter((product) => product.category === selectedCategory)
+    : productsData;
 
-        {/* Ratings */}
-        <View style={styles.ratingContainer}>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <FontAwesome
-              key={index}
-              name={index < Math.floor(item.rating) ? "star" : "star-o"}
-              size={18}
-              color="#FFD700"
-            />
-          ))}
-          <Text style={styles.ratingText}>{item.rating.toFixed(1)}</Text>
-        </View>
+  const renderProductItem = ({ item }: { item: any }) => {
+    const isLiked = likedProducts.includes(item.id);
 
-        {/* Product Location */}
-        <Text style={styles.productLocation}>{item.location}</Text>
-        <Text style={styles.productCategory}>{item.category}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+    return (
+      <TouchableOpacity
+        style={styles.productItemContainer}
+        onPress={() => navigation.navigate("ProductDetail", { id: item.id })}
+      >
+        <Image style={styles.productItemImage} source={item.image} />
+        <View style={styles.productItemDetails}>
+          <View style={styles.productItemHeader}>
+            <Text style={styles.productItemName} numberOfLines={1}>
+              {item.name}
+            </Text>
+            <TouchableOpacity onPress={() => handleLikePress(item.id)}>
+              <FontAwesome
+                name={isLiked ? "heart" : "heart-o"}
+                size={24}
+                color={isLiked ? "red" : "gray"}
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.productItemPrice}>₹{item.price.toFixed(2)}</Text>
+          <View style={styles.ratingContainer}>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <FontAwesome
+                key={index}
+                name={index < Math.floor(item.rating || 0) ? "star" : "star-o"}
+                size={18}
+                color="#FFD700"
+              />
+            ))}
+            <Text style={styles.ratingText}>
+              {item.rating ? item.rating.toFixed(1) : "N/A"}
+            </Text>
+          </View>
+          <Text style={styles.productLocation}>{item.location}</Text>
+          <Text style={styles.productCategory}>{item.category}</Text>
+          {/* Removed productQuantity */}
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -144,21 +90,33 @@ export default function Products({ navigation }: { navigation: any }) {
       {/* Categories Section */}
       <View style={styles.wrapper}>
         {categoriesData.map((data) => (
-          <Categories key={data.id} data={data} />
+          <TouchableOpacity
+            key={data.id}
+            style={styles.circleWrapper}
+            onPress={() => handleCategoryPress(data.name)}
+          >
+            <LinearGradient
+              colors={["#FFDEE9", "#B5FFFC"]}
+              style={styles.gradientCircle}
+            >
+              <Image source={data.image} style={styles.img} />
+            </LinearGradient>
+            <Text style={styles.textCat}>{data.name}</Text>
+          </TouchableOpacity>
         ))}
       </View>
 
       {/* Products List */}
       <View style={styles.products}>
         <FlatList
-          data={products}
+          data={filteredProducts}
           renderItem={renderProductItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.productListContainer}
         />
       </View>
 
-      <Nav navigation={navigation} />
+      <Nav navigation={navigation} isLoggedIn={false} />
     </View>
   );
 }
@@ -184,7 +142,7 @@ const styles = StyleSheet.create({
     width: "90%",
     paddingHorizontal: 10,
     marginBottom: 20,
-    marginTop:10,
+    marginTop: 10,
     height: 50,
     backgroundColor: "#FFF",
     borderRadius: 10,
@@ -209,11 +167,7 @@ const styles = StyleSheet.create({
   wrapper: {
     width: "55%",
     flexDirection: "row",
-    //flexWrap: "wrap",
     justifyContent: "center",
-   // borderWidth:3,
-   // borderColor:"#989898",
-    
   },
   circleWrapper: {
     alignItems: "center",
@@ -248,7 +202,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   productListContainer: {
-    width:"100%",
+    width: "100%",
     paddingBottom: 20,
   },
   productItemContainer: {
@@ -259,9 +213,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 20,
-   // borderWidth:4,
-    
-  //  borderColor:"#C8C8C8",
     shadowColor: "#696969",
     shadowOffset: {
       width: 4,
@@ -292,7 +243,8 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   productItemPrice: {
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: "bold",
     color: "#35C759",
     marginTop: 5,
   },
@@ -305,9 +257,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#555",
     marginTop: 3,
-  },
-  wishlistButton: {
-    marginLeft: 10,
   },
   ratingContainer: {
     flexDirection: "row",
