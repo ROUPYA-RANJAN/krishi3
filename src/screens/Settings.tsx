@@ -1,64 +1,65 @@
-import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-export default function Settings({ navigation }: { navigation: any }) {
+export default function SettingsScreen({ navigation }: { navigation: any }) {
+  // List of settings options
+  const settingsOptions = [
+    { id: '1', title: 'Change Languange', icon: 'edit' , screen: 'Language'},
+    { id: '2', title: 'Change Password', icon: 'lock' },
+    { id: '3', title: 'Privacy Settings', icon: 'security' },
+    { id: '4', title: 'Notifications', icon: 'notifications' },
+    { id: '5', title: 'Help & Support', icon: 'help' },
+    { id: '6', title: 'Wallet', icon: 'wallet' },
+    { id: '7', title: 'Purchase History', icon: 'history', screen: 'PurchaseHistory' },
+    { id: '8', title: 'App Theme', icon: 'palette' },
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
-      
-      <View style={styles.option}>
-        <Text style={styles.optionText}>Profile Settings</Text>
-        <TouchableOpacity
-          style={styles.optionButton}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Text style={styles.optionButtonText}>Go to Profile</Text>
-        </TouchableOpacity>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.grid}>
+        {settingsOptions.map((option) => (
+          <TouchableOpacity
+            key={option.id}
+            style={styles.button}
+            onPress={() => navigation.navigate(option.screen || option.title)}
+          >
+            <MaterialIcons name={option.icon} size={30} color="#fff" style={styles.icon} />
+            <Text style={styles.buttonText}>{option.title}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-
-      <View style={styles.option}>
-        <Text style={styles.optionText}>App Settings</Text>
-        {/* Add more settings options as needed */}
-      </View>
-    </View>
-    
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
-    alignItems: "center",
+    backgroundColor: '#f5f5f5',
     padding: 20,
   },
-  header: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginVertical: 20,
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
-  option: {
-    backgroundColor: "#fff",
+  button: {
+    backgroundColor: '#303030',
+    borderRadius: 20,
+    width: '48%',
     padding: 20,
-    borderRadius: 10,
-    width: "100%",
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
+  icon: {
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
   },
-  optionText: {
-    fontSize: 18,
-    color: "#333",
-  },
-  optionButton: {
-    marginTop: 10,
-    backgroundColor: "#33c37d",
-    padding: 10,
-    borderRadius: 5,
-  },
-  optionButtonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
+  buttonText: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });

@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   profileContainer: {
-    marginTop: 20,
+    marginTop: 0,
     alignItems: "center",
     marginBottom: 20,
   },

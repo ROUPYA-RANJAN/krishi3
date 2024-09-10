@@ -83,7 +83,7 @@ export default function Products({ navigation }: { navigation: any }) {
     <View style={styles.container}>
       {/* Search Box */}
       <View style={styles.searchBox}>
-        <MaterialIcons name="search" size={30} color={"gray"} />
+        <MaterialIcons name="search" size={35} color={"gray"} />
         <TextInput style={styles.input} placeholder="Search for Products..." />
       </View>
 
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   productItemName: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
     color: "#333",
     textTransform: "capitalize",

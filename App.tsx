@@ -23,7 +23,9 @@ import Products from "./src/screens/Products";
 import Profile from "./src/screens/Profile";
 import AddProduct from "./src/screens/AddProduct"; // AddProduct screen
 import Settings from './src/screens/Settings'; // Import Settings screen
-
+import PurchaseHistory from "./src/screens/PurchaseHistory";
+import PaymentHistory from "./src/screens/PaymentHistory";
+import Language from "./src/screens/Language";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -51,10 +53,11 @@ export default function App() {
             },
           headerBackground: () => (
             <LinearGradient
-              colors={["#4c669f", "#3b5998", "#192f6a"]}
+              colors={["#2874F0", "#2874F0", "#2874F0"]}
               style={styles.headerGradient}
               start={[0, 0]}
               end={[1, 1]}
+              
             />
           ),
           headerTintColor: "#fff",
@@ -71,6 +74,8 @@ export default function App() {
           component={Splash}
           options={{ headerShown: false }}
         />
+         
+         
 
         {/* Welcome Screen */}
         <Stack.Screen
@@ -122,6 +127,20 @@ export default function App() {
           component={Settings}
           options={{ title: "Settings" }}
         />
+          {/* History Screen */}
+          <Stack.Screen
+          name="PurchaseHistory"
+          component={PurchaseHistory}
+          options={{ title: "PurchaseHistory" }}
+        />
+          {/* Language Screen */}
+          <Stack.Screen
+          name="Language"
+          component={Language}
+          options={{ title: "Language" }}
+        />
+         
+        
 
         {/* Other Screens */}
         <Stack.Screen name="Products" component={Products} />
@@ -158,6 +177,7 @@ export default function App() {
 const styles = StyleSheet.create({
   headerGradient: {
     flex: 1,
+    
   },
   logo: {
     width: 120,
