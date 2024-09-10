@@ -24,8 +24,9 @@ import Profile from "./src/screens/Profile";
 import AddProduct from "./src/screens/AddProduct"; // AddProduct screen
 import Settings from './src/screens/Settings'; // Import Settings screen
 import PurchaseHistory from "./src/screens/PurchaseHistory";
-import PaymentHistory from "./src/screens/PaymentHistory";
+
 import Language from "./src/screens/Language";
+import ChatScreen from "./src/screens/Chat";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -88,17 +89,12 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={({ navigation }) => ({
-            title: "Kisaan Bazaar",
+          options={{ title: "Home" }}
 
-            headerTitle: () => (
-              <Image
-                source={{ uri: "https://your-logo-url.com/logo.png" }}
-                style={styles.logo}
-                resizeMode="contain"
-              />
-            ),
-          })}
+           
+              
+            
+          
         />
 
         {/* Profile Screen */}
@@ -139,7 +135,12 @@ export default function App() {
           component={Language}
           options={{ title: "Language" }}
         />
-         
+          {/* chat Screen */}
+          <Stack.Screen
+          name="Chat"
+          component={ChatScreen}
+          options={{ title: "Chat" }}
+        />
         
 
         {/* Other Screens */}

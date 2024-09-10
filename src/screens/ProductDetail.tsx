@@ -156,7 +156,7 @@ const ProductDetail = (props: { route: any; navigation: any }) => {
             </LinearGradient>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={() => alert("Negotiate Price")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Chat")}>
             <LinearGradient colors={['#ff6347', '#FF4500']} style={styles.gradientButton}>
               <Text style={styles.buttonText}>Negotiate</Text>
             </LinearGradient>

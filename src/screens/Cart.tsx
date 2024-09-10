@@ -89,8 +89,9 @@ export default function Cart({ navigation }: { navigation: any}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#efefef",
+    backgroundColor: "#fff",
     padding: 20,
+    
   },
   cartList: {
     flex: 1,
@@ -99,9 +100,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#efefef",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 25,
   },
   itemImage: {
     width: 80,

@@ -40,6 +40,7 @@ const PaymentScreen = () => {
           onChangeText={setCvv}
           secureTextEntry={true}
         />
+        <TextInput >OR</TextInput>
          <TextInput
           style={styles.input}
           placeholder="UPI"
@@ -91,6 +92,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-});
+}
+
+);
 
 export default PaymentScreen;
