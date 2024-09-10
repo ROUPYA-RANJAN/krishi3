@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#303030',
+    backgroundColor: '#A8A8A8',
     borderRadius: 20,
     width: '48%',
     padding: 20,
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginBottom: 10,
+    color:'black',
   },
   buttonText: {
-    color: '#fff',
+    color: 'black',
     fontSize: 15,
     fontWeight: 'bold',
   },
