@@ -11,7 +11,7 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
     { id: '4', title: 'Notifications', icon: 'notifications' },
     { id: '5', title: 'Help & Support', icon: 'help' },
     { id: '6', title: 'Wallet', icon: 'wallet' },
-    { id: '7', title: 'Purchase History', icon: 'history', screen: 'PurchaseHistory' },
+    { id: '7', title: 'Payment History', icon: 'history', screen: 'PaymentHistory' },
     { id: '8', title: 'App Theme', icon: 'palette' },
   ];
 

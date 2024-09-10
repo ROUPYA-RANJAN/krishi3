@@ -27,6 +27,7 @@ import PurchaseHistory from "./src/screens/PurchaseHistory";
 
 import Language from "./src/screens/Language";
 import ChatScreen from "./src/screens/Chat";
+import PaymentHistory from "./src/screens/PaymentHistory";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -128,6 +129,12 @@ export default function App() {
           name="PurchaseHistory"
           component={PurchaseHistory}
           options={{ title: "PurchaseHistory" }}
+        />
+         {/* History Screen */}
+         <Stack.Screen
+          name="PaymentHistory"
+          component={PaymentHistory}
+          options={{ title: "PaymentHistory" }}
         />
           {/* Language Screen */}
           <Stack.Screen
