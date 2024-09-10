@@ -1,7 +1,9 @@
 // screens/ChatScreen.js
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { Send } from 'react-native-gifted-chat';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
@@ -36,7 +38,14 @@ const ChatScreen = () => {
           onChangeText={setText}
           placeholder="Type a message"
         />
-        <Button title="Send" onPress={handleSend} />
+  
+        <TouchableOpacity style={styles.SendButton} onPress={handleSend}>
+        <MaterialIcons
+          name={"send"}
+          size={30}
+          color={"#2874F0"}
+        />
+      </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -52,24 +61,36 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   message: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#DCDCDC',
+    padding: 15,
+    borderRadius: 10,
     marginBottom: 10,
+    width:"90%",
+    borderWidth:1,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#fff',
+    borderRadius:20,
+    backgroundColor: '#D0D0D0',
+    margin:10,
+    
   },
   input: {
     flex: 1,
-    borderColor: '#ddd',
+    borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
+    backgroundColor:"#fff",
     marginRight: 10,
+    
+  },
+  SendButton: {
+   
+    
+
   },
 });
 
