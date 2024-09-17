@@ -5,10 +5,10 @@ import Nav from "../components/Nav";
 
 export default function Profile({ navigation }: { navigation: any }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Subhasish Mausa");
-  const [email, setEmail] = useState("123@example.com");
+  const [name, setName] = useState("Subhasish Behera");
+  const [email, setEmail] = useState("Subhasish@gmail.com");
   const [location, setLocation] = useState("Gothapatana");
-  const [phone, setPhone] = useState("(+91)98765-43210");
+  const [phone, setPhone] = useState("+91-6371933473");
 
   // Constant seller/buyer ID
   const buyerSellerID = "S1245";

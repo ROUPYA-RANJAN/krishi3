@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 12, // Rounded corners
     paddingHorizontal: 15,
     marginBottom: 15,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     elevation: 2, // Shadow for input fields
   },
   image: {
@@ -209,9 +209,10 @@ const styles = StyleSheet.create({
   categoryContainer: {
     width: '48%',
     marginBottom: 20,
-    borderRadius: 12, // Rounded corners
+    borderWidth:1,
+    borderRadius: 20, // Rounded corners
     overflow: 'hidden',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f0f0f0',
     elevation: 3, // Shadow for category containers
   },
   categoryImage: {

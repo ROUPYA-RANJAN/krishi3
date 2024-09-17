@@ -16,7 +16,7 @@ const SplashScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/logo.png")} />
-      <Text style={styles.title}>Kishaan Bazaar</Text>
+      <Text style={styles.title}>From Farm to Table</Text>
       <Image style={styles.img} source={SplashImg} />
     </View>
   );
